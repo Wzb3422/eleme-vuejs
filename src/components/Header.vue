@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     deliver () {
-      return `${this.seller.data.description}\\${this.seller.data.deliveryTime}分钟送达`
+      return `${this.seller.data.description}\\预计${this.seller.data.deliveryTime}分钟送达`
     },
     discountText () {
       return `${this.seller.data.supports[0].description}`
