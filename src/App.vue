@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header :seller="this.seller" />
+    <Header :seller="seller" />
   </div>
 </template>
 
@@ -19,12 +19,12 @@ export default {
     }
   },
   mounted () {
+    const _this = this
     axios.get('/api/seller')
       .then((res) => {
-        this.seller = res.data
-        console.log(this.seller)
+        _this.seller = res.data
+        console.log(_this.seller)
       })
-    console.log(this.seller)
   }
 }
 </script>

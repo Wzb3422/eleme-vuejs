@@ -2,23 +2,23 @@
   <div class="header-warpper">
     <div class="blur"></div>
     <div class="header-content">
-      <img src="http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg" alt="">
+      <img :src="seller.data.avatar" alt="">
       <div class="header-text">
         <div class="title">
           <img class="brand" src="../assets/img/png/brand@2x.png" alt="">
-          <div class="shop-name">粥品香坊(大运村)</div>
+          <div class="shop-name">{{ seller.data.name }}</div>
         </div>
-        <div class="deliver">蜂鸟专送/35分钟送达</div>
+        <div class="deliver">{{ deliver }}</div>
         <div class="discount">
           <img class="decrease" src="../assets/img/png/decrease_1@2x.png" alt="">
-          <div class="discount-text">在线支付满28减5，满50减10</div>
+          <div class="discount-text">{{ discountText }}</div>
         </div>
       </div>
     </div>
-    <div class="tags-pop iconfont">5个&#xe622;</div>
+    <div class="tags-pop iconfont">{{ supportsNum }}个&#xe622;</div>
     <div class="bar">
       <img src="../assets/img/png/bulletin@2x.png" alt="">
-      <div class="bulletin">{{ bulletin }}</div>
+      <div class="bulletin">{{ seller.data.bulletin }}</div>
       <div class="iconfont">&#xe622;</div>
     </div>
   </div>
@@ -27,9 +27,18 @@
 <script>
 export default {
   name: 'Header',
-  data () {
-    return {
-      bulletin: '粥品香坊其烹饪粥料的秘方源于中国千年古法，在融和现代制作工艺，由世界烹饪大师屈浩先生领衔研发。坚守纯天然、0添加的良心品质深得消费者青睐，发展至今成为粥类的引领品牌。是2008年奥运会和2013年园博会指定餐饮服务商。'
+  props: {
+    seller: Object
+  },
+  computed: {
+    deliver () {
+      return `${this.seller.data.description}\\${this.seller.data.deliveryTime}分钟送达`
+    },
+    discountText () {
+      return `${this.seller.data.supports[0].description}`
+    },
+    supportsNum () {
+      return this.seller.data.supports.length.toString()
     }
   }
 }
