@@ -1,5 +1,5 @@
 <template>
-  <div class="header-warpper">
+  <div class="header-warpper" @click="popShow">
     <div class="blur"></div>
     <div class="header-content">
       <img :src="seller.data.avatar" alt="">
@@ -39,6 +39,11 @@ export default {
     },
     supportsNum () {
       return this.seller.data.supports.length.toString()
+    }
+  },
+  methods: {
+    popShow () {
+      this.$emit('popShow')
     }
   }
 }
