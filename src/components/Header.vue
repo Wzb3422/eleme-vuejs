@@ -50,6 +50,7 @@ export default {
   width 100%
   position relative
   background rgba(7, 17, 27, 0.5)
+  overflow hidden
   .blur
     position absolute
     top 0
