@@ -1,5 +1,5 @@
 <template>
-  <div class="header-warpper" @click="popShow">
+  <div class="header-warpper" @click="popShow" v-if="seller.data">
     <div class="blur"></div>
     <div class="header-content">
       <img :src="seller.data.avatar" alt="">
@@ -28,7 +28,12 @@
 export default {
   name: 'Header',
   props: {
-    seller: Object
+    seller: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
   },
   computed: {
     deliver () {

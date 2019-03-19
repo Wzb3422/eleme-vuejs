@@ -1,5 +1,5 @@
 <template>
-  <div class="header-pop-warpper">
+  <div class="header-pop-warpper" v-if="seller.data">
     <div class="pop-title">{{ seller.data.name }}</div>
     <div class="pop-stars iconfont">&#xe632;&#xe632;&#xe632;&#xe632;&#xe632;</div>
     <div class="pop-promo">
