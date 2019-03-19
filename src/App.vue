@@ -46,13 +46,13 @@ export default {
 .fade-enter
   opacity 0
 .fade-enter-active
-  transition opacity  1s
+  transition opacity  .6s
 .fade-enter-to
   opacity 0.8
 .fade-leave
   opacity 0.8
 .fade-leave-active
-  transition opacity 1s
+  transition opacity .6s
 .fade-leave-to
   opacity 0
 </style>
