@@ -36,7 +36,7 @@ export default {
     const _this = this
     axios.get('/api/seller')
       .then((res) => {
-        _this.seller = res.data
+        _this.seller = res.data.data
         console.log(_this.seller)
       })
   }
