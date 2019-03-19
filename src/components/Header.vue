@@ -1,12 +1,12 @@
 <template>
-  <div class="header-warpper" @click="popShow" v-if="seller.data">
+  <div class="header-warpper" @click="popShow" v-if="seller.supports">
     <div class="blur"></div>
     <div class="header-content">
-      <img :src="seller.data.avatar" alt="">
+      <img :src="seller.avatar" alt="">
       <div class="header-text">
         <div class="title">
           <img class="brand" src="../assets/img/png/brand@2x.png" alt="">
-          <div class="shop-name">{{ seller.data.name }}</div>
+          <div class="shop-name">{{ seller.name }}</div>
         </div>
         <div class="deliver">{{ deliver }}</div>
         <div class="discount">
@@ -18,7 +18,7 @@
     <div class="tags-pop iconfont">{{ supportsNum }}个&#xe622;</div>
     <div class="bar">
       <img src="../assets/img/png/bulletin@2x.png" alt="">
-      <div class="bulletin">{{ seller.data.bulletin }}</div>
+      <div class="bulletin">{{ seller.bulletin }}</div>
       <div class="iconfont">&#xe622;</div>
     </div>
   </div>
@@ -37,13 +37,13 @@ export default {
   },
   computed: {
     deliver () {
-      return `${this.seller.data.description}\\预计${this.seller.data.deliveryTime}分钟送达`
+      return `${this.seller.description}\\预计${this.seller.deliveryTime}分钟送达`
     },
     discountText () {
-      return `${this.seller.data.supports[0].description}`
+      return `${this.seller.supports[0].description}`
     },
     supportsNum () {
-      return this.seller.data.supports.length.toString()
+      return this.seller.supports.length.toString()
     }
   },
   methods: {

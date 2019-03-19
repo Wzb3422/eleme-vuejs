@@ -1,6 +1,6 @@
 <template>
-  <div class="header-pop-warpper" v-if="seller.data">
-    <div class="pop-title">{{ seller.data.name }}</div>
+  <div class="header-pop-warpper" v-if="seller">
+    <div class="pop-title">{{ seller.name }}</div>
     <div class="pop-stars iconfont">&#xe632;&#xe632;&#xe632;&#xe632;&#xe632;</div>
     <div class="pop-promo">
       <div class="pop-head">
@@ -9,7 +9,7 @@
         <div class="pop-bar"></div>
       </div>
       <div class="promo-body">
-        <div class="promo-item" v-for="item of seller.data.supports" :key="item.type">
+        <div class="promo-item" v-for="item of seller.supports" :key="item.type">
           <img class="promo-item-logo" :src="getTypeImg(item.type)" alt="">
           <div class="promo-item-text">{{ item.description }}</div>
         </div>
@@ -22,7 +22,7 @@
         <div class="pop-bar"></div>
       </div>
       <div class="notice-body">
-        {{ seller.data.bulletin }}
+        {{ seller.bulletin }}
       </div>
     </div>
     <div class="iconfont cross" @click="popHide">&#xe604;</div>
@@ -36,10 +36,10 @@ export default {
     seller: Object
   },
   methods: {
-    popHide () {
+    popHide() {
       this.$emit('popHide')
     },
-    getTypeImg (type) {
+    getTypeImg(type) {
       switch (type) {
         case 1:
           return 'https://i.loli.net/2019/03/18/5c8f08b28abed.png'
