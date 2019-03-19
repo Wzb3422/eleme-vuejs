@@ -9,10 +9,12 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Header from './components/Header.vue'
 import HeaderPop from './components/HeaderPop'
 import Tab from './components/Tab'
+import {
+  getSeller
+} from '../src/api'
 
 export default {
   name: 'app',
@@ -33,12 +35,9 @@ export default {
     }
   },
   mounted () {
-    const _this = this
-    axios.get('/api/seller')
-      .then((res) => {
-        _this.seller = res.data.data
-        console.log(_this.seller)
-      })
+    getSeller().then((data) => {
+      this.seller = data
+    })
   }
 }
 </script>
