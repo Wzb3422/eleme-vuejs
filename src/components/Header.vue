@@ -1,5 +1,5 @@
 <template>
-  <div class="header-warpper" @click="popShow" v-if="seller.supports">
+  <div class="header-warpper" v-if="seller.supports">
     <div class="blur"></div>
     <div class="header-content">
       <img :src="seller.avatar" alt="">
@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <div class="tags-pop iconfont">{{ supportsNum }}个&#xe622;</div>
+    <div class="tags-pop iconfont" @click="popShow">{{ supportsNum }}个&#xe622;</div>
     <div class="bar">
       <img src="../assets/img/png/bulletin@2x.png" alt="">
       <div class="bulletin">{{ seller.bulletin }}</div>

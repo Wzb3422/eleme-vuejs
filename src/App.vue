@@ -35,9 +35,13 @@ export default {
     }
   },
   mounted () {
-    getSeller().then((data) => {
+    getSeller()
+      .then(data => {
       this.seller = data
-    })
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 </script>
