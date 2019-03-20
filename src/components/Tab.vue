@@ -4,22 +4,30 @@
       v-model="selectedLabel"
       :data="tabs"
       :showSlider="true"
-      @click="clickHandler"
-      @change="changeHandler"
+      ref="tabBar"
     >
     </cube-tab-bar>
 
-    <cube-tab-panels v-model="selectedLabel">
-      <cube-tab-panel :label="'商品'">
-        <Food />
-      </cube-tab-panel>
-      <cube-tab-panel :label="'评论'">
-        <Comment />
-      </cube-tab-panel>
-      <cube-tab-panel :label="'商家'">
-        <Shop />
-      </cube-tab-panel>
-    </cube-tab-panels>
+    <cube-slide
+      :loop=false
+      :auto-play=false
+      :show-dots=false
+      :initialIndex=index
+      :options=slideOptions
+      @change=onSwiperChange
+      @scroll=onScrollChange
+    >
+      <cube-slide-item>
+          <Food />
+      </cube-slide-item>
+      <cube-slide-item>
+           <Comment />
+      </cube-slide-item>
+      <cube-slide-item>
+          <Shop />
+      </cube-slide-item>
+    </cube-slide>
+
   </div>
 </template>
 
@@ -43,29 +51,48 @@ export default {
         label: '评论'
       }, {
         label: '商家'
-      }]
+      }],
+      index: 0,
+      slideOptions: {
+        listenScroll: true,
+        probeType: 3,
+        directionLockThreshold: 0
+      }
     }
   },
   methods: {
-    clickHandler (label) {
-      // if you clicked home tab, then print 'Home'
-      console.log(label)
+    onSwiperChange(index) {
+      this.selectedLabel = this.tabs[index].label
     },
-    changeHandler (label) {
-      // if you clicked different tab, this methods can be emitted
+    onScrollChange(pos) {
+      console.log(pos.x)
+      console.log(this.$refs.tabBar.$el.lastChild.style.transform)
+      this.$refs.tabBar.$el.lastChild.style.transform = `translateX(${-pos.x/375*125}px) translateZ(0px)`
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-.cube-tab-bar
+
+.tab-warpper >>> .cube-tab-bar
   height 40px
-.cube-tab-bar >>> .cube-tab
+.tab-warpper >>> .cube-tab
   padding 12px 0
   font-size 16px
   font-weight 200
   color rgb(240, 20, 20)
-.cube-tab-bar >>> .cube-tab-bar-slider
+.tab-warpper >>> .cube-tab-bar-slider
   background rgb(240, 20, 20)
+.tab-warpper >>> .cube-slide
+  flex 1
+.tab-warpper
+  position fixed
+  top 134px
+  right 0
+  left 0
+  bottom 0
+  display flex
+  flex-direction column
+  overflow hidden
 </style>
