@@ -24,8 +24,6 @@
         </div>
       </div>
     </cube-scroll>
-
-
   </div>
 </template>
 

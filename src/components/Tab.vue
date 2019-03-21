@@ -5,6 +5,7 @@
       :data="tabs"
       :showSlider="true"
       ref="tabBar"
+      @click="tabClick"
     >
     </cube-tab-bar>
 
@@ -35,6 +36,7 @@
 import Food from './Food'
 import Comment from './Comment'
 import Shop from './Shop'
+import { deflate } from 'zlib';
 export default {
   name: 'Tab',
   components: {
@@ -61,7 +63,25 @@ export default {
     }
   },
   methods: {
+    tabClick(label) {
+      console.log(label)
+      switch (label) {
+        case '商品':
+          this.index = 0
+          break
+        case '评论':
+          this.index = 1
+          break
+        case '商家':
+          this.index = 2
+          break
+        default:
+          return null
+      }
+      this.selectedLabel = label
+    },
     onSwiperChange(index) {
+      console.log(index)
       this.selectedLabel = this.tabs[index].label
     },
     onScrollChange(pos) {
