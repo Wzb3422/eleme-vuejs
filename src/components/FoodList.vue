@@ -85,11 +85,13 @@ export default {
         line-height 14px
         margin 2px 0 8px 0
       .food-item-desc
-        height 12px
-        line-height 12px
+        height 14px
+        line-height 14px
         color rgb(153, 153, 153)
         font-size 12px
-        margin-bottom 8px
+        width 190px
+        margin-bottom 6px
+        text-overflow ellipsis
       .food-item-extra
         height 10px
         line-height 10px

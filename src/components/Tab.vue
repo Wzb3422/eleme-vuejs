@@ -36,7 +36,6 @@
 import Food from './Food'
 import Comment from './Comment'
 import Shop from './Shop'
-import { deflate } from 'zlib';
 export default {
   name: 'Tab',
   components: {
