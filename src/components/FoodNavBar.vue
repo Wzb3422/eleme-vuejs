@@ -2,11 +2,8 @@
   <div class="nav-bar">
     <cube-scroll
     ref="scroll"
-    :data="goodsNames"
-    :options="options" />
-      <!-- <div class="nav-bar-item" v-for="item in goods" :key="item.name">
-        <div class="item-name">{{ item.name }}</div>
-      </div> -->
+    :data="computedGoodsName"
+    />
   </div>
 </template>
 
@@ -18,8 +15,15 @@ export default {
   },
   data() {
     return {
-      options: {},
-      goodsNames: ['热销榜','热销榜','热销榜','热销榜','热销榜','热销榜','热销榜','热销榜','热销榜','热销榜']
+    }
+  },
+  computed: {
+    computedGoodsName() {
+      let ret = []
+      this.goods.map(item => {
+        ret.push(item.name)
+      })
+      return ret
     }
   }
 }
@@ -28,6 +32,7 @@ export default {
 <style lang="stylus" scoped>
 .nav-bar
   width 80px
+  height 437px
 .nav-bar >>> .cube-scroll-item
   padding 0 12px
   width 56px

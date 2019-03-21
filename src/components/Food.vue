@@ -24,7 +24,7 @@ export default {
     getGoods()
       .then(data => {
         this.goods = data
-        console.log(this.goods)
+        // console.log(this.goods)
       })
       .catch(err => {
         console.log(err)

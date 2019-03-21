@@ -5,6 +5,7 @@
       <HeaderPop v-show="isPop" @popHide="handlePop" :seller="seller" />
     </transition>
     <Tab />
+    <ShopCart />
   </div>
 </template>
 
@@ -12,6 +13,7 @@
 import Header from './components/Header.vue'
 import HeaderPop from './components/HeaderPop'
 import Tab from './components/Tab'
+import ShopCart from './components/ShopCart'
 import {
   getSeller
 } from './api'
@@ -21,7 +23,8 @@ export default {
   components: {
     Header,
     Tab,
-    HeaderPop
+    HeaderPop,
+    ShopCart
   },
   data () {
     return {

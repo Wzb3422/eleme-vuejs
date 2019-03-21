@@ -65,8 +65,6 @@ export default {
       this.selectedLabel = this.tabs[index].label
     },
     onScrollChange(pos) {
-      console.log(pos.x)
-      console.log(this.$refs.tabBar.$el.lastChild.style.transform)
       this.$refs.tabBar.$el.lastChild.style.transform = `translateX(${-pos.x / 375 * 125}px) translateZ(0px)`
     }
   }
