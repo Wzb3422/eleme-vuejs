@@ -1,29 +1,55 @@
 <template>
   <div class="food-list">
-    <div class="title">热销榜</div>
-    <div class="food-item">
-      <div class="icon">
-        <img src="http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114" alt="">
-      </div>
-      <div class="content">
-        <div class="food-item-name">皮蛋瘦肉粥</div>
-        <div class="food-item-desc">咸粥</div>
-        <div class="food-item-extra">
-          <span>月售999份</span>
-          <span>好评率99%</span>
+    <cube-scroll
+      nestMode="native"
+    >
+      <div v-for="item of goods" :key="item.name">
+        <div class="title">{{ item.name }}</div>
+        <div class="food-item" v-for="innerItem of item.foods" :key="innerItem.name">
+          <div class="icon">
+            <img :src="innerItem.icon" alt="">
+          </div>
+          <div class="content">
+            <div class="food-item-name">{{ innerItem.name }}</div>
+            <div class="food-item-desc" v-if="innerItem.description != ''">{{ innerItem.description }}</div>
+            <div class="food-item-extra">
+              <span>月售{{ innerItem.sellCount }}份</span>
+              <span>好评率{{ innerItem.rating }}%</span>
+            </div>
+            <div class="price">
+              <span>${{ innerItem.price }}</span>
+              <div class="iconfont">&#xe659;</div>
+            </div>
+          </div>
         </div>
-        <div class="price">
-          <span>$10</span>
-          <div class="iconfont">&#xe659;</div>
-        </div>
       </div>
-    </div>
+    </cube-scroll>
+
+
   </div>
 </template>
 
 <script>
+import {
+  getGoods
+} from '../api'
 export default {
-
+  name: 'FoodList',
+  data() {
+    return {
+      goods: []
+    }
+  },
+  mounted() {
+    getGoods()
+      .then(data => {
+        this.goods = data
+        console.log(this.goods)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 }
 </script>
 
@@ -75,6 +101,7 @@ export default {
           padding-right 12px
       .price
         margin-top 6px
+        width 184px
         span
           font-size 14px
           color rgb(240, 20, 20)
