@@ -1,12 +1,13 @@
 <template>
   <div class="food-warpper">
     <FoodNavBar :goods="goods"/>
-    <div class="food-item-list"></div>
+    <FoodList />
   </div>
 </template>
 
 <script>
 import FoodNavBar from './FoodNavBar'
+import FoodList from './FoodList'
 import {
   getGoods
 } from '../api'
@@ -18,7 +19,8 @@ export default {
     }
   },
   components: {
-    FoodNavBar
+    FoodNavBar,
+    FoodList
   },
   mounted() {
     getGoods()
@@ -39,7 +41,6 @@ export default {
   width 100%
   display flex
   overflow hidden
-  
-  .food-item-list
-    flex 1
+.food-warpper >>> .food-list
+  flex 1
 </style>
