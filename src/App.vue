@@ -14,7 +14,7 @@ import HeaderPop from './components/HeaderPop'
 import Tab from './components/Tab'
 import {
   getSeller
-} from '../src/api'
+} from './api'
 
 export default {
   name: 'app',

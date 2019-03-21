@@ -18,13 +18,13 @@
       @scroll=onScrollChange
     >
       <cube-slide-item>
-          <Food />
+        <Food />
       </cube-slide-item>
       <cube-slide-item>
-           <Comment />
+        <Comment />
       </cube-slide-item>
       <cube-slide-item>
-          <Shop />
+        <Shop />
       </cube-slide-item>
     </cube-slide>
 
@@ -67,7 +67,7 @@ export default {
     onScrollChange(pos) {
       console.log(pos.x)
       console.log(this.$refs.tabBar.$el.lastChild.style.transform)
-      this.$refs.tabBar.$el.lastChild.style.transform = `translateX(${-pos.x/375*125}px) translateZ(0px)`
+      this.$refs.tabBar.$el.lastChild.style.transform = `translateX(${-pos.x / 375 * 125}px) translateZ(0px)`
     }
   }
 }
