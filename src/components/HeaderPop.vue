@@ -30,11 +30,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'HeaderPop',
-  props: {
-    seller: Object
-  },
   methods: {
     popHide() {
       this.$emit('popHide')
@@ -53,6 +51,14 @@ export default {
           return 'https://i.loli.net/2019/03/18/5c8f08b28f166.png'
       }
     }
+  },
+  computed: {
+    ...{ // localComputed
+
+    },
+    ...mapState({
+      seller: state => state.seller
+    })
   }
 }
 </script>

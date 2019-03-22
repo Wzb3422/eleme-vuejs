@@ -1,7 +1,7 @@
 <template>
   <div class="food-warpper">
     <FoodNavBar :goods="goods"/>
-    <FoodList />
+    <FoodList @add="onAdd"/>
   </div>
 </template>
 
@@ -31,6 +31,11 @@ export default {
       .catch(err => {
         console.log(err)
       })
+  },
+  methods: {
+    onAdd(itemInfo) {
+      console.log(itemInfo.price)
+    }
   }
 }
 </script>

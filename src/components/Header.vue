@@ -8,14 +8,14 @@
           <img class="brand" src="../assets/img/png/brand@2x.png" alt="">
           <div class="shop-name">{{ seller.name }}</div>
         </div>
-        <div class="deliver">{{ deliver }}</div>
+        <div class="deliver">{{ deliveryTimeText }}</div>
         <div class="discount">
           <img class="decrease" src="../assets/img/png/decrease_1@2x.png" alt="">
-          <div class="discount-text">{{ discountText }}</div>
+          <div class="discount-text">{{ discountDesc }}</div>
         </div>
       </div>
     </div>
-    <div class="tags-pop iconfont" @click="popShow">{{ supportsNum }}个&#xe622;</div>
+    <div class="tags-pop iconfont" @click="popShow">{{ supportNum }}个&#xe622;</div>
     <div class="bar">
       <img src="../assets/img/png/bulletin@2x.png" alt="">
       <div class="bulletin">{{ seller.bulletin }}</div>
@@ -25,26 +25,29 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { INIT_HEADER } from '../store/mutationTypes'
 export default {
   name: 'Header',
-  props: {
-    seller: {
-      type: Object,
-      default () {
-        return {}
+  computed:{
+    ...{ // localState
+      deliveryTimeText() {
+        return `${this.seller.description}/预计${this.seller.deliveryTime}分钟送达`
+      },
+      discountDesc() {
+        return this.seller.supports[0].description
+      },
+      supportNum() {
+        return this.seller.supports.length
       }
-    }
+    },
+    ...mapState({
+      seller: state => state.seller
+    })
   },
-  computed: {
-    deliver () {
-      return `${this.seller.description}\\预计${this.seller.deliveryTime}分钟送达`
-    },
-    discountText () {
-      return `${this.seller.supports[0].description}`
-    },
-    supportsNum () {
-      return this.seller.supports.length.toString()
-    }
+  mounted() {
+    this.$store.dispatch(INIT_HEADER)
+    console.log(this.seller)
   },
   methods: {
     popShow () {

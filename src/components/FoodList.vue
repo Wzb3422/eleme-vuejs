@@ -3,9 +3,9 @@
     <cube-scroll
       nestMode="native"
     >
-      <div v-for="item of goods" :key="item.name">
+      <div v-for="(item, index) of goods" :key="item.name">
         <div class="title">{{ item.name }}</div>
-        <div class="food-item" v-for="innerItem of item.foods" :key="innerItem.name">
+        <div class="food-item" v-for="(innerItem, innerIndex) of item.foods" :key="innerItem.name">
           <div class="icon">
             <img :src="innerItem.icon" alt="">
           </div>
@@ -18,7 +18,7 @@
             </div>
             <div class="price">
               <span>${{ innerItem.price }}</span>
-              <div class="iconfont">&#xe659;</div>
+              <div class="iconfont" @click="addToCart(index, innerIndex)">&#xe659;</div>
             </div>
           </div>
         </div>
@@ -42,11 +42,18 @@ export default {
     getGoods()
       .then(data => {
         this.goods = data
-        console.log(this.goods)
+        // console.log(this.goods)
       })
       .catch(err => {
         console.log(err)
       })
+  },
+  methods: {
+    addToCart(index, innerIndex) {
+      const itemInfo = this.goods[index].foods[innerIndex]
+      console.log(itemInfo)
+      this.$emit('add', itemInfo)
+    }
   }
 }
 </script>
@@ -101,7 +108,7 @@ export default {
           padding-right 12px
       .price
         margin-top 6px
-        width 184px
+        width 100%
         span
           font-size 14px
           color rgb(240, 20, 20)
