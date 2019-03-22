@@ -8,23 +8,22 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'FoodNavBar',
-  props: {
-    goods: Array
-  },
-  data() {
-    return {
-    }
-  },
   computed: {
-    computedGoodsName() {
+    ...{
+      computedGoodsName() {
       let ret = []
       this.goods.map(item => {
         ret.push(item.name)
       })
       return ret
-    }
+      }
+    },
+    ...mapState({
+      goods: state => state.goods
+    })
   }
 }
 </script>

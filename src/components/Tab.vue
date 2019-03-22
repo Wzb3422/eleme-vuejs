@@ -63,7 +63,6 @@ export default {
   },
   methods: {
     tabClick(label) {
-      console.log(label)
       switch (label) {
         case '商品':
           this.index = 0
@@ -80,7 +79,6 @@ export default {
       this.selectedLabel = label
     },
     onSwiperChange(index) {
-      console.log(index)
       this.selectedLabel = this.tabs[index].label
     },
     onScrollChange(pos) {

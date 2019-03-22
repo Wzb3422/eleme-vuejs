@@ -2,7 +2,7 @@
   <div id="app">
     <Header @popShow="handlePop" />
     <transition name="fade">
-      <HeaderPop v-show="isPop" @popHide="handlePop" :seller="seller" />
+      <HeaderPop v-show="isPop" @popHide="handlePop" />
     </transition>
     <Tab />
     <ShopCart />
