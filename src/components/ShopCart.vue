@@ -27,10 +27,11 @@ export default {
         return true
       },
       isActive() {
-        if ( this.totalPrice === 0 )
+        if (this.totalPrice === 0) {
           return false
-        else
+        } else {
           return true
+        }
       }
     },
     ...mapState({
