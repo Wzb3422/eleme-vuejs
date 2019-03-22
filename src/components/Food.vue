@@ -1,7 +1,7 @@
 <template>
   <div class="food-warpper">
     <FoodNavBar />
-    <FoodList @add="onAdd"/>
+    <FoodList/>
   </div>
 </template>
 
@@ -22,11 +22,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch(INIT_GOODS)
-  },
-  methods: {
-    onAdd(itemInfo) {
-      console.log(itemInfo.price)
-    }
   }
 }
 </script>

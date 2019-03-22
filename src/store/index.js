@@ -8,7 +8,8 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     seller: [],
-    goods: []
+    goods: [],
+    cart: []
   },
   mutations: {
     initHeader(state, payload) {
@@ -16,6 +17,12 @@ export const store = new Vuex.Store({
     },
     initGoods(state, payload) {
       state.goods = payload
+    },
+    addCart(state, { name, price }) {
+      let newState = state.cart
+      newState.push({ name, price })
+      state.cart = newState
+      console.log(state.cart)
     }
   },
   actions: {

@@ -29,13 +29,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import { ADD_CART } from '../store/mutationTypes'
 export default {
   name: 'FoodList',
   methods: {
     addToCart(index, innerIndex) {
       const itemInfo = this.goods[index].foods[innerIndex]
-      console.log(itemInfo)
-      this.$emit('add', itemInfo)
+      console.log('add')
+      this.$store.commit(ADD_CART, itemInfo)
     }
   },
   computed: mapState({

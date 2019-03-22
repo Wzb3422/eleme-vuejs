@@ -1,25 +1,49 @@
 <template>
   <div class="shop-cart-warpper">
     <div class="shop-cart-logo">
-      <div class="iconfont">
+      <div class="iconfont" :class="{active: isActive}">
         &#xe60e;
       </div>
     </div>
-    <div class="price">
-      $0
+    <div class="price"  :class="{active: isActive}">
+      ${{ totalPrice }}
     </div>
     <div class="desc">
-      另需派送费4元
+      另需派送费{{ deliveryPrice }}元
     </div>
-    <div class="pay">
+    <div class="pay" :class="isEnough ? 'enough' : 'notEnough'">
       差20元起送
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'ShopCart'
+  name: 'ShopCart',
+  computed: {
+    ...{
+      isEnough() {
+        return true
+      },
+      isActive() {
+        if ( this.totalPrice === 0 )
+          return false
+        else
+          return true
+      }
+    },
+    ...mapState({
+      totalPrice(state) {
+        let ret = 0
+        state.cart.map(item => {
+          ret += item.price
+        })
+        return ret
+      },
+      deliveryPrice: state => state.seller.deliveryPrice
+    })
+  }
 }
 </script>
 
@@ -50,6 +74,8 @@ export default {
       text-align center
       line-height 44px
       font-size 26px
+    .active
+      background #00a0dc
   .price
     height 24px
     position absolute
@@ -57,6 +83,8 @@ export default {
     top 16px
     font-family PingFang SC,STHeitiSC-Light,Helvetica-Light,arial,sans-serif,Droid Sans Fallback
     font-weight  700
+  .active
+      color #fff
   .desc
     height 24px
     margin-top 12px
