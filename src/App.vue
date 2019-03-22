@@ -1,27 +1,29 @@
 <template>
   <div id="app">
-    <Header :seller="seller" @popShow="handlePop" />
+    <Header @popShow="handlePop" />
     <transition name="fade">
       <HeaderPop v-show="isPop" @popHide="handlePop" :seller="seller" />
     </transition>
     <Tab />
+    <ShopCart />
   </div>
 </template>
 
 <script>
+import { store } from './store'
 import Header from './components/Header.vue'
 import HeaderPop from './components/HeaderPop'
 import Tab from './components/Tab'
-import {
-  getSeller
-} from '../src/api'
+import ShopCart from './components/ShopCart'
 
 export default {
   name: 'app',
+  store,
   components: {
     Header,
     Tab,
-    HeaderPop
+    HeaderPop,
+    ShopCart
   },
   data () {
     return {
@@ -33,15 +35,6 @@ export default {
     handlePop () {
       this.isPop = !this.isPop
     }
-  },
-  mounted () {
-    getSeller()
-      .then(data => {
-      this.seller = data
-      })
-      .catch(err => {
-        console.log(err)
-      })
   }
 }
 </script>
