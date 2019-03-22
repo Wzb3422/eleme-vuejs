@@ -29,7 +29,7 @@ import { mapState } from 'vuex'
 import { INIT_HEADER } from '../store/mutationTypes'
 export default {
   name: 'Header',
-  computed:{
+  computed: {
     ...{ // localState
       deliveryTimeText() {
         return `${this.seller.description}/预计${this.seller.deliveryTime}分钟送达`
@@ -47,7 +47,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch(INIT_HEADER)
-    console.log(this.seller)
   },
   methods: {
     popShow () {

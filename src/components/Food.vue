@@ -1,6 +1,6 @@
 <template>
   <div class="food-warpper">
-    <FoodNavBar :goods="goods"/>
+    <FoodNavBar />
     <FoodList @add="onAdd"/>
   </div>
 </template>
@@ -8,9 +8,7 @@
 <script>
 import FoodNavBar from './FoodNavBar'
 import FoodList from './FoodList'
-import {
-  getGoods
-} from '../api'
+import { INIT_GOODS } from '../store/mutationTypes'
 export default {
   name: 'Food',
   data() {
@@ -23,14 +21,7 @@ export default {
     FoodList
   },
   mounted() {
-    getGoods()
-      .then(data => {
-        this.goods = data
-        // console.log(this.goods)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    this.$store.dispatch(INIT_GOODS)
   },
   methods: {
     onAdd(itemInfo) {
