@@ -19,19 +19,19 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
-    initHeader(context) {
+    initHeader({ commit }) {
       getSeller()
         .then(data => {
-          context.commit(INIT_HEADER, data)
+          commit(INIT_HEADER, data)
         })
         .catch(err => {
           console.log(err)
         })
     },
-    initGoods(context) {
+    initGoods({ commit }) {
       getGoods()
         .then(data => {
-          context.commit(INIT_GOODS, data)
+          commit(INIT_GOODS, data)
         })
         .catch(err => {
           console.log(err)
