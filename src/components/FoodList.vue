@@ -28,33 +28,19 @@
 </template>
 
 <script>
-import {
-  getGoods
-} from '../api'
+import { mapState } from 'vuex'
 export default {
   name: 'FoodList',
-  data() {
-    return {
-      goods: []
-    }
-  },
-  mounted() {
-    getGoods()
-      .then(data => {
-        this.goods = data
-        // console.log(this.goods)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  },
   methods: {
     addToCart(index, innerIndex) {
       const itemInfo = this.goods[index].foods[innerIndex]
       console.log(itemInfo)
       this.$emit('add', itemInfo)
     }
-  }
+  },
+  computed: mapState({
+      goods: state => state.goods
+    })
 }
 </script>
 
