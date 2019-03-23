@@ -30,13 +30,26 @@
 <script>
 import { mapState } from 'vuex'
 import { ADD_CART } from '../store/mutationTypes'
+import { setTimeout } from 'timers';
 export default {
   name: 'FoodList',
+  data() {
+    return {
+      isClicking: true
+    }
+  },
   methods: {
+    // 条件判断加异步执行解决click加倍的问题
     addToCart(index, innerIndex) {
-      const itemInfo = this.goods[index].foods[innerIndex]
-      console.log('add')
-      this.$store.commit(ADD_CART, itemInfo)
+      if (this.isClicking) {
+        this.isClicking = false
+        setTimeout(() => {
+          const itemInfo = this.goods[index].foods[innerIndex]
+          console.log('add')
+          this.$store.commit(ADD_CART, itemInfo)
+          this.isClicking = true
+        }, 1)
+      }
     }
   },
   computed: mapState({

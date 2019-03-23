@@ -23,6 +23,7 @@ export const store = new Vuex.Store({
       newState.push({ name, price })
       state.cart = newState
       console.log(state.cart)
+      console.log(state.cart.length)
     }
   },
   actions: {
