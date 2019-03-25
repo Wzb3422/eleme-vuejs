@@ -1,7 +1,7 @@
 <template>
   <div class="shop-cart-warpper">
     <div class="shop-cart-logo">
-      <div class="iconfont" :class="{active: isActive}">
+      <div class="iconfont" :class="{active: isActive}" @click="popList">
         &#xe60e;
       </div>
     </div>
@@ -12,8 +12,26 @@
       另需派送费{{ deliveryPrice }}元
     </div>
     <div class="pay" :class="isEnough ? 'enough' : 'notEnough'">
-      差20元起送
+      {{ payText }}
     </div>
+    <transition name="list">
+      <div class="item-list" :class="{animated: isPop, zoomIn: isPop, faster: isPop}" v-show="isPop">
+        <div class="list-title">
+          <span>购物车</span>
+          <span>清空</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-name">葱花饼</div>
+          <div class="iconfont">&#xe659;</div>
+          <div class="list-item-count">1</div>
+          <div class="iconfont">&#xe621;</div>
+          <div class="list-item-price">$9</div>
+        </div>
+      </div>
+    </transition>
+    <transition name="list">
+      <div class="cart-pop-mask" v-show="isPop"></div>
+    </transition>
   </div>
 </template>
 
@@ -21,16 +39,38 @@
 import { mapState } from 'vuex'
 export default {
   name: 'ShopCart',
+  data() {
+    return {
+      isPop: false
+    }
+  },
+  methods: {
+    popList() {
+      this.isPop = !this.isPop
+    }
+  },
   computed: {
     ...{
       isEnough() {
-        return true
+        if (this.totalPrice >= 20) {
+          return true
+        } else {
+          return false
+        }
       },
       isActive() {
-        if ( this.totalPrice === 0 )
+        if (this.totalPrice === 0) {
           return false
-        else
+        } else {
           return true
+        }
+      },
+      payText() {
+        if (this.isEnough === false) {
+          return `还差${20 - this.totalPrice}元起送`
+        } else {
+          return '去结算'
+        }
       }
     },
     ...mapState({
@@ -41,7 +81,8 @@ export default {
         })
         return ret
       },
-      deliveryPrice: state => state.seller.deliveryPrice
+      deliveryPrice: state => state.seller.deliveryPrice,
+      cart: state => state.cart
     })
   }
 }
@@ -106,4 +147,70 @@ export default {
     font-size 12px
     text-align center
     line-height 48px
+    &.enough
+      background #00B43C
+      color #fff
+  .item-list
+    width 100%
+    position fixed
+    bottom 48px
+    left 0
+    right 0
+    z-index -1
+    .list-title
+      width 100%
+      height 40px
+      line-height 40px
+      font-size 14px
+      color #333333
+      box-sizing border-box
+      padding 0 18px
+      background #f3f5f7
+      span:last-child
+        color #00a0dc
+        font-size 12px
+        float right
+    .list-item
+      height 48px
+      width 100%
+      box-sizing border-box
+      padding 0 12px 0 18px
+      background #fff
+      z-index 0
+      div
+        float right
+      .list-item-name
+        color #333333
+        font-size 14px
+        line-height 48px
+        float left
+      .iconfont
+        color rgb(0 ,160, 220)
+        height 24px
+        width 24px
+        font-size 20px
+        margin 12px 8px
+        line-height 24px
+        text-align center
+      .list-item-count, .list-item-price
+        margin 16px 0
+      .list-item-price
+        margin-right 5px
+        color #f01414
+        font-size 16px
+  .cart-pop-mask
+    position fixed
+    top 0
+    left 0
+    bottom 48px
+    right 0
+    background rgb(7, 17, 27, 0.6)
+    opacity 0.66
+    z-index -2
+    &.list-enter
+      opacity 0
+    &.list-enter-active
+      transition opacity .5s
+    &.list-enter-to
+      opacity 0.66
 </style>
