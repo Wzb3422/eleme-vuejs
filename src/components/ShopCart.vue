@@ -15,7 +15,7 @@
       {{ payText }}
     </div>
     <transition name="list">
-      <div class="item-list" :class="{animated: isPop, 	slideInUp: isPop}" v-show="isPop">
+      <div class="item-list" :class="{animated: isPop, 	zoomIn: isPop, faster: isPop}" v-show="isPop">
         <div class="list-title">
           <span>购物车</span>
           <span>清空</span>
@@ -71,6 +71,15 @@ export default {
         } else {
           return '去结算'
         }
+      },
+      itemList() {
+        let ret = [] // 返回值是一个对象数组
+        let searchedNames = []
+        for (let i = 0; i < this.cart.length; i++) {
+          // 判断该项的name是否在searchedNames中
+          let isExist = false
+          this.cart[i].name
+        }
       }
     },
     ...mapState({
@@ -81,7 +90,8 @@ export default {
         })
         return ret
       },
-      deliveryPrice: state => state.seller.deliveryPrice
+      deliveryPrice: state => state.seller.deliveryPrice,
+      cart: state => state.cart
     })
   }
 }
@@ -199,7 +209,7 @@ export default {
         font-size 16px
   .cart-pop-mask
     position fixed
-    top 0 
+    top 0
     left 0
     bottom 48px
     right 0
@@ -209,7 +219,7 @@ export default {
     &.list-enter
       opacity 0
     &.list-enter-active
-      transition opacity .6s
+      transition opacity .5s
     &.list-enter-to
       opacity 0.66
 </style>
