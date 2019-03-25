@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getSeller, getGoods } from '../api'
-import { INIT_HEADER, INIT_GOODS } from './mutationTypes'
+import { getSeller, getGoods, getRatings } from '../api'
+import { INIT_HEADER, INIT_GOODS, INIT_RATINGS } from './mutationTypes'
 
 Vue.use(Vuex)
 
@@ -9,7 +9,8 @@ export const store = new Vuex.Store({
   state: {
     seller: [],
     goods: [],
-    cart: []
+    cart: [],
+    ratings: []
   },
   mutations: {
     initHeader(state, payload) {
@@ -17,6 +18,9 @@ export const store = new Vuex.Store({
     },
     initGoods(state, payload) {
       state.goods = payload
+    },
+    initRatings(state, payload) {
+      state.ratings = payload
     },
     addItem(state, { name, price }) {
       let newState = state.cart
@@ -49,6 +53,15 @@ export const store = new Vuex.Store({
       getGoods()
         .then(data => {
           commit(INIT_GOODS, data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    initRatings({ commit }) {
+      getRatings()
+        .then(data => {
+          commit(INIT_RATINGS, data)
         })
         .catch(err => {
           console.log(err)

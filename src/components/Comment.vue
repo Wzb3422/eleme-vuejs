@@ -7,11 +7,15 @@
 </template>
 
 <script>
+import { INIT_RATINGS } from '../store/mutationTypes'
 import CommentRating from './CommentRating'
 export default {
   name: 'Comment',
   components: {
     CommentRating
+  },
+  mounted() {
+    this.$store.dispatch(INIT_RATINGS)
   }
 }
 </script>

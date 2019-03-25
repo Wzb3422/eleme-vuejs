@@ -1,21 +1,45 @@
 <template>
   <div class="comment-rating-warpper">
     <div class="rating-left">
-      <div class="rating-left-scroe">4.2</div>
+      <div class="rating-left-scroe">{{ sellerInfo.score }}</div>
       <div class="rating-left-text">综合评分</div>
-      <div class="rating-left-compare">高于周边商家12.3%</div>
+      <div class="rating-left-compare">高于周边商家{{ sellerInfo.rankRate }}</div>
     </div>
     <div class="rating-right">
-      <div>服务态度</div>
-      <div>商品评分</div>
-      <div>送达时间</div>
+      <CommentStar :score="item.score" :name="item.name" v-for="item of stars" :key="item.name"/>
+      <div class="deliver">
+        <span>送达时间</span>
+        <span>38分钟</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import CommentStar from './CommentStar'
 export default {
-  name: 'CommentRating'
+  name: 'CommentRating',
+  components: {
+    CommentStar
+  },
+  computed: {
+    ...{
+      stars() {
+        let { score, serviceScore } = this.sellerInfo
+        return [{
+          score,
+          name: '服务态度'
+        }, {
+          score: serviceScore,
+          name: '商品评价'
+        }]
+      }
+    },
+    ...mapState({
+      sellerInfo: state => state.seller
+    })
+  }
 }
 </script>
 
@@ -48,4 +72,11 @@ export default {
       line-height 10px
   .rating-right
     flex 1
+    .deliver
+      padding-left 24px
+      span
+        font-size 12px
+      span:last-child
+        margin-left 10px
+        color #999999
 </style>
