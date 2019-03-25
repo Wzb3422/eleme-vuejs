@@ -18,12 +18,21 @@ export const store = new Vuex.Store({
     initGoods(state, payload) {
       state.goods = payload
     },
-    addCart(state, { name, price }) {
+    addItem(state, { name, price }) {
       let newState = state.cart
       newState.push({ name, price })
       state.cart = newState
       console.log(state.cart)
       console.log(state.cart.length)
+    },
+    delItem(state, { name }) {
+      for (let i = 0; i < state.cart.length; i++) {
+        if (state.cart[i].name === name) {
+          state.cart.splice(i, 1)
+          console.log(state.cart)
+          break
+        }
+      }
     }
   },
   actions: {

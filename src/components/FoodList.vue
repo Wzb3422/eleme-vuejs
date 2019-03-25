@@ -18,7 +18,8 @@
             </div>
             <div class="price">
               <span>${{ innerItem.price }}</span>
-              <div class="iconfont" @click="addToCart(index, innerIndex)">&#xe659;</div>
+              <div class="iconfont addIcon" @click="changeItem(index, innerIndex, 'add')">&#xe659;</div>
+              <div class="iconfont minusIcon" @click="changeItem(index, innerIndex, 'del')">&#xe621;</div>
             </div>
           </div>
         </div>
@@ -29,7 +30,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { ADD_CART } from '../store/mutationTypes'
+import { ADD_ITEM, DEL_ITEM } from '../store/mutationTypes'
 import { setTimeout } from 'timers';
 export default {
   name: 'FoodList',
@@ -40,13 +41,14 @@ export default {
   },
   methods: {
     // 条件判断加异步执行解决click加倍的问题
-    addToCart(index, innerIndex) {
+    changeItem(index, innerIndex, type) {
       if (this.isClicking) {
         this.isClicking = false
         setTimeout(() => {
           const itemInfo = this.goods[index].foods[innerIndex]
           console.log('add')
-          this.$store.commit(ADD_CART, itemInfo)
+          const mutationType = type === 'add' ? ADD_ITEM : DEL_ITEM
+          this.$store.commit(mutationType, itemInfo)
           this.isClicking = true
         }, 1)
       }
@@ -109,13 +111,23 @@ export default {
       .price
         margin-top 6px
         width 100%
+        position relative
         span
           font-size 14px
           color rgb(240, 20, 20)
-        div
+        .addIcon
           float right
           height 22px
           width 22px
           font-size 22px
+          color rgb(0 ,160, 220)
+        .minusIcon
+          position absolute
+          right 40px // transition property
+          top 0
+          height 22px
+          width 22px
+          font-size 22px
+          float right
           color rgb(0 ,160, 220)
 </style>
