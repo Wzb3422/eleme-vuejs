@@ -2,6 +2,7 @@
   <div class="comment-warpper">
     <cube-scroll>
       <CommentRating />
+      <CommentList />
     </cube-scroll>
   </div>
 </template>
@@ -9,10 +10,12 @@
 <script>
 import { INIT_RATINGS } from '../store/mutationTypes'
 import CommentRating from './CommentRating'
+import CommentList from './CommentList'
 export default {
   name: 'Comment',
   components: {
-    CommentRating
+    CommentRating,
+    CommentList
   },
   mounted() {
     this.$store.dispatch(INIT_RATINGS)

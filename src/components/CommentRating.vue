@@ -49,6 +49,7 @@ export default {
   height 82px
   padding 18px 0
   display flex
+  border-bottom 1px solid #ddd
   .rating-left
     height 100%
     width 136px
