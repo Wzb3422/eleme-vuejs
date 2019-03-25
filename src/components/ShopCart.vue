@@ -15,7 +15,7 @@
       {{ payText }}
     </div>
     <transition name="list">
-      <div class="item-list" :class="{animated: isPop, 	zoomIn: isPop, faster: isPop}" v-show="isPop">
+      <div class="item-list" :class="{animated: isPop, zoomIn: isPop, faster: isPop}" v-show="isPop">
         <div class="list-title">
           <span>购物车</span>
           <span>清空</span>
@@ -70,15 +70,6 @@ export default {
           return `还差${20 - this.totalPrice}元起送`
         } else {
           return '去结算'
-        }
-      },
-      itemList() {
-        let ret = [] // 返回值是一个对象数组
-        let searchedNames = []
-        for (let i = 0; i < this.cart.length; i++) {
-          // 判断该项的name是否在searchedNames中
-          let isExist = false
-          this.cart[i].name
         }
       }
     },

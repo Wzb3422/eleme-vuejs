@@ -31,7 +31,6 @@
 <script>
 import { mapState } from 'vuex'
 import { ADD_ITEM, DEL_ITEM } from '../store/mutationTypes'
-import { setTimeout } from 'timers';
 export default {
   name: 'FoodList',
   data() {
