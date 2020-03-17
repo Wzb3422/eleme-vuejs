@@ -2,7 +2,7 @@
 
 > 本项目是基于Vuejs和cube-ui构建的饿了么Web APP
 
-本项目依据gitflow开发模式
+大一仿的练手项目
 
 ## Project setup
 ```
